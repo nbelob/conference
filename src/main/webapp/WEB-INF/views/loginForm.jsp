@@ -21,7 +21,7 @@
                 <tr>
                     <td></td>
                     <td align="right">
-                        <input type="submit" value="Войти" style="width:100" />
+                        <input type="submit" name="login" value="Войти" style="width:100" />
                     </td>
                 </tr>
                 <tr>
@@ -30,7 +30,7 @@
                 <tr>
                     <td></td>
                     <td align="right">
-                        <input type="submit" value="Регистрация" style="width:100" />
+                        <input type="submit" name="registration" value="Регистрация" style="width:100" />
                     </td>
                 </tr>
             </table>

@@ -15,8 +15,14 @@ public class ConfController {
         return "loginForm";
     }
 
-    @RequestMapping(method = POST)
-    public String LoginForm() {
+    @RequestMapping(method = POST, params = "registration")
+    public String processLoginForm() {
         return "registrationForm";
+    }
+
+    @RequestMapping(method = POST, params = "login")
+    public String loginForm() {
+        //TODO: implement
+        return null;
     }
 }
