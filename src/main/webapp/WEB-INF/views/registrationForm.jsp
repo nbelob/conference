@@ -1,4 +1,3 @@
-<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>-->
 <%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -9,11 +8,15 @@
             <table align="center">
                 <tr>
                     <td>Имя:</td>
-                    <td><input type="text" name="username" /></td>
+                    <td><input type="text" name="username" style="width:200" /></td>
                 </tr>
                 <tr>
                     <td>Пароль:</td>
-                    <td><input type="text" name="password" /></td>
+                    <td><input type="text" name="password" style="width:200" /></td>
+                </tr>
+                <tr>
+                    <td>Повторите пароль:</td>
+                    <td><input type="text" name="repeatPassword" style="width:200" /></td>
                 </tr>
                 <tr>
                     <td height="10"></td>
@@ -21,16 +24,7 @@
                 <tr>
                     <td></td>
                     <td align="right">
-                        <input type="submit" value="Войти" style="width:100" />
-                    </td>
-                </tr>
-                <tr>
-                    <td height="5"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="right">
-                        <input type="submit" value="Регистрация" style="width:100" />
+                        <input type="submit" value="Зарегистрироваться и войти" style="width:200" />
                     </td>
                 </tr>
             </table>
