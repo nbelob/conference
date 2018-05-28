@@ -7,22 +7,34 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class ConfController {
 
-    @RequestMapping(method = GET)
+    @RequestMapping(value = "/login", method = GET)
     public String showLoginForm() {
         return "loginForm";
     }
 
-    @RequestMapping(method = POST, params = "registration")
+    @RequestMapping(value = "/login", method = POST, params = "registration")
+    public String registrationLoginForm() {
+        return "redirect:/register";
+    }
+
+    @RequestMapping(value = "/login", method = POST, params = "login")
+    public String loginLoginForm() {
+        //TODO: implement
+        return "mainForm";
+    }
+
+    @RequestMapping(value = "/register", method = GET)
     public String showRegistrationForm() {
+        //TODO: implement
         return "registrationForm";
     }
 
-    @RequestMapping(method = POST, params = "login")
-    public String processLoginForm() {
+    @RequestMapping(value = "/register", method = POST)
+    public String processRegistrationForm() {
         //TODO: implement
-        return null;
+        return "mainForm";
     }
 }
