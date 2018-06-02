@@ -5,15 +5,15 @@
     <title>Конференция</title>
 </head>
     <body>
-        <form method="POST">
+        <form method="POST" modelAttribute="loginForm">
             <table align="center">
                 <tr>
                     <td>Имя:</td>
-                    <td><input type="text" name="username" /></td>
+                    <td><input type="text" name="username" path="username" /></td>
                 </tr>
                 <tr>
                     <td>Пароль:</td>
-                    <td><input type="text" name="password" /></td>
+                    <td><input type="text" name="password" path="password" /></td>
                 </tr>
                 <tr>
                     <td height="10"></td>

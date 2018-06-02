@@ -21,7 +21,9 @@ public class ConfController {
     }
 
     @RequestMapping(value = "/login", method = POST, params = "login")
-    public String loginLoginForm() {
+    public String loginLoginForm(LoginForm loginForm) {
+        System.out.println("*" + loginForm.getUsername() + "*");
+        System.out.println("*" + loginForm.getPassword() + "*");
         //TODO: implement
         return "mainForm";
     }
@@ -33,7 +35,10 @@ public class ConfController {
     }
 
     @RequestMapping(value = "/register", method = POST)
-    public String processRegistrationForm() {
+    public String processRegistrationForm(RegistrationForm registrationForm) {
+        System.out.println(registrationForm.getUsername());
+        System.out.println(registrationForm.getPassword());
+        System.out.println(registrationForm.getConfPassword());
         //TODO: implement
         return "mainForm";
     }

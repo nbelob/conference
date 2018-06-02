@@ -1,16 +1,9 @@
 package conference.web;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-public class LoginForm {
-    @NotNull
-    @NotEmpty(message = "Введите логин")
+public class RegistrationForm {
     private String username;
-
-    @NotNull
-    @NotEmpty(message = "Введите пароль")
     private String password;
+    private String confPassword;
 
     public String getUsername() {
         return username;
@@ -26,5 +19,13 @@ public class LoginForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfPassword() {
+        return confPassword;
+    }
+
+    public void setConfPassword(String confPassword) {
+        this.confPassword = confPassword;
     }
 }

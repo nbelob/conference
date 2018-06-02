@@ -4,19 +4,19 @@
     <title>Конференция</title>
 </head>
     <body>
-        <form method="POST">
+        <form method="POST" modelAttribute="registrationForm">
             <table align="center">
                 <tr>
                     <td>Имя:</td>
-                    <td><input type="text" name="username" style="width:200" /></td>
+                    <td><input type="text" name="username" style="width:200" path="username" /></td>
                 </tr>
                 <tr>
                     <td>Пароль:</td>
-                    <td><input type="text" name="password" style="width:200" /></td>
+                    <td><input type="text" name="password" style="width:200" path="password" /></td>
                 </tr>
                 <tr>
                     <td>Повторите пароль:</td>
-                    <td><input type="text" name="repeatPassword" style="width:200" /></td>
+                    <td><input type="text" name="confPassword" style="width:200" path="confPassword" /></td>
                 </tr>
                 <tr>
                     <td height="10"></td>
