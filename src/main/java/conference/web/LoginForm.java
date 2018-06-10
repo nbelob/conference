@@ -2,14 +2,16 @@ package conference.web;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class LoginForm {
     @NotNull
-    @NotEmpty(message = "Введите логин")
+    @NotEmpty(message = "{username.empty}")
+    @Size(min = 1, max = 16, message = "{username.size}")
     private String username;
 
     @NotNull
-    @NotEmpty(message = "Введите пароль")
+    @NotEmpty(message = "{password.empty}")
     private String password;
 
     public String getUsername() {
