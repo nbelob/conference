@@ -1,7 +1,14 @@
 package conference.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -10,8 +17,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 //@RequestMapping("/")
 public class ConfController {
 
+    private Map<String, String> accounts = new HashMap<>();
+
+    public ConfController() {
+        accounts.put("bnl", "pppppp");
+        accounts.put("user", "passuser");
+        accounts.put("mp", "passmp");
+    }
+
     @RequestMapping(value = "/login", method = GET)
-    public String showLoginForm() {
+    public String showLoginForm(Model model) {
+        model.addAttribute(new LoginForm());
         return "loginForm";
     }
 
@@ -21,11 +37,20 @@ public class ConfController {
     }
 
     @RequestMapping(value = "/login", method = POST, params = "login")
-    public String loginLoginForm(LoginForm loginForm) {
-        System.out.println("*" + loginForm.getUsername() + "*");
-        System.out.println("*" + loginForm.getPassword() + "*");
+    public String loginLoginForm(@Valid LoginForm loginForm, Errors errors) {
+        if (errors.hasErrors()) {
+            return "loginForm";
+        }
+
+        System.out.println(loginForm.getUsername());
+        System.out.println(loginForm.getPassword());
+
+        if (accounts.get(loginForm.getUsername()).equals(loginForm.getPassword())) {
+            return "mainForm";
+        } else {
+            return "loginForm";
+        }
         //TODO: implement
-        return "mainForm";
     }
 
     @RequestMapping(value = "/register", method = GET)
@@ -35,7 +60,11 @@ public class ConfController {
     }
 
     @RequestMapping(value = "/register", method = POST)
-    public String processRegistrationForm(RegistrationForm registrationForm) {
+    public String processRegistrationForm(@Valid RegistrationForm registrationForm, Errors errors) {
+        if (errors.hasErrors()) {
+            return "registrationForm";
+        }
+
         System.out.println(registrationForm.getUsername());
         System.out.println(registrationForm.getPassword());
         System.out.println(registrationForm.getConfPassword());

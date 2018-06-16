@@ -1,22 +1,26 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>Конференция</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
     <body>
-        <form method="POST" modelAttribute="registrationForm">
+        <sf:form method="POST" modelAttribute="registrationForm">
+            <sf:errors path="*" element="div" cssClass="errors"/>
             <table align="center">
                 <tr>
-                    <td>Имя:</td>
-                    <td><input type="text" name="username" style="width:200" path="username" /></td>
+                    <td><sf:label path="username" cssErrorClass="error">Имя</sf:label>:</td>
+                    <td><sf:input path="username" cssErrorClass="error"/></td>
                 </tr>
                 <tr>
-                    <td>Пароль:</td>
-                    <td><input type="text" name="password" style="width:200" path="password" /></td>
+                    <td><sf:label path="password" cssErrorClass="error">Пароль</sf:label>:</td>
+                    <td><sf:password path="password" cssErrorClass="error"/></td>
                 </tr>
                 <tr>
-                    <td>Повторите пароль:</td>
-                    <td><input type="text" name="confPassword" style="width:200" path="confPassword" /></td>
+                    <td><sf:label path="confPassword" cssErrorClass="error">Повторите пароль</sf:label>:</td>
+                    <td><sf:password path="confPassword" cssErrorClass="error"/></td>
                 </tr>
                 <tr>
                     <td height="10"></td>
@@ -28,6 +32,6 @@
                     </td>
                 </tr>
             </table>
-        </form>
+        </sf:form>
     </body>
 </html>
