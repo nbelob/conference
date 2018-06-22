@@ -54,8 +54,8 @@ public class ConfController {
     }
 
     @RequestMapping(value = "/register", method = GET)
-    public String showRegistrationForm() {
-        //TODO: implement
+    public String showRegistrationForm(Model model) {
+        model.addAttribute(new RegistrationForm());
         return "registrationForm";
     }
 
