@@ -42,10 +42,10 @@ public class ConfController {
             return "loginForm";
         }
 
-        System.out.println(loginForm.getUsername());
-        System.out.println(loginForm.getPassword());
+        /*System.out.println(loginForm.getUsername());
+        System.out.println(loginForm.getPassword());*/
 
-        if (accounts.get(loginForm.getUsername()).equals(loginForm.getPassword())) {
+        if ((accounts.containsKey(loginForm.getUsername())) && (accounts.get(loginForm.getUsername()).equals(loginForm.getPassword()))) {
             return "mainForm";
         } else {
             return "loginForm";
@@ -64,11 +64,16 @@ public class ConfController {
         if (errors.hasErrors()) {
             return "registrationForm";
         }
+        if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
+            return "registrationForm";
+        } else {
+            accounts.put(registrationForm.getUsername(), registrationForm.getPassword());
+            return "mainForm";
+        }
 
-        System.out.println(registrationForm.getUsername());
+        /*System.out.println(registrationForm.getUsername());
         System.out.println(registrationForm.getPassword());
-        System.out.println(registrationForm.getConfPassword());
+        System.out.println(registrationForm.getConfPassword());*/
         //TODO: implement
-        return "mainForm";
     }
 }
