@@ -1,5 +1,7 @@
 package conference.web;
 
+import conference.dao.AccountDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,12 +19,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 //@RequestMapping("/")
 public class ConfController {
 
-    private Map<String, String> accounts = new HashMap<>();
+    private AccountDao accountDao;
 
-    public ConfController() {
-        accounts.put("bnl", "pppppp");
-        accounts.put("user", "passuser");
-        accounts.put("mp", "passmp");
+    @Autowired
+    public ConfController(AccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     @RequestMapping(value = "/login", method = GET)
@@ -45,7 +46,7 @@ public class ConfController {
         /*System.out.println(loginForm.getUsername());
         System.out.println(loginForm.getPassword());*/
 
-        if ((accounts.containsKey(loginForm.getUsername())) && (accounts.get(loginForm.getUsername()).equals(loginForm.getPassword()))) {
+        if (accountDao.find(loginForm.getUsername(), loginForm.getPassword())) {
             return "mainForm";
         } else {
             return "loginForm";
@@ -67,7 +68,7 @@ public class ConfController {
         if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
             return "registrationForm";
         } else {
-            accounts.put(registrationForm.getUsername(), registrationForm.getPassword());
+            accountDao.add(registrationForm.getUsername(), registrationForm.getPassword());
             return "mainForm";
         }
 
