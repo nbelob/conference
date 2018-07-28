@@ -27,11 +27,23 @@ public class MapAccountDao implements AccountDao {
     }
 
     @Override
-    public boolean find(String username, String password) {
-        if ((accounts.containsKey(username)) && (accounts.get(username).equals(password))) {
+    public int find(String username, String password) {
+        if (!accounts.containsKey(username)) {
+            return 1;
+        } else if (!accounts.get(username).equals(password)) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public boolean findUsername(String username) {
+        if (accounts.containsKey(username)) {
             return true;
         } else {
             return false;
         }
     }
+
 }

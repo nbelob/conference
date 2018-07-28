@@ -2,6 +2,7 @@ package conference.web;
 
 import conference.dao.AccountDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,10 +21,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ConfController {
 
     private AccountDao accountDao;
+    private MessageSourceAccessor messageSourceAccessor;
 
     @Autowired
-    public ConfController(AccountDao accountDao) {
+    public ConfController(AccountDao accountDao, MessageSourceAccessor messageSourceAccessor) {
         this.accountDao = accountDao;
+        this.messageSourceAccessor = messageSourceAccessor;
     }
 
     @RequestMapping(value = "/login", method = GET)
@@ -45,10 +48,14 @@ public class ConfController {
 
         /*System.out.println(loginForm.getUsername());
         System.out.println(loginForm.getPassword());*/
-
-        if (accountDao.find(loginForm.getUsername(), loginForm.getPassword())) {
+        int r = accountDao.find(loginForm.getUsername(), loginForm.getPassword());
+        if (r == 0) {
             return "mainForm";
+        } else if (r == 1) {
+            errors.reject("account.empty", messageSourceAccessor.getMessage("account.empty"));
+            return "loginForm";
         } else {
+            errors.reject("account.password", messageSourceAccessor.getMessage("account.password"));
             return "loginForm";
         }
         //TODO: implement
@@ -65,7 +72,10 @@ public class ConfController {
         if (errors.hasErrors()) {
             return "registrationForm";
         }
-        if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
+        if (accountDao.findUsername(registrationForm.getUsername())) {
+            errors.reject("account.username", messageSourceAccessor.getMessage("account.username"));
+            return "registrationForm";
+        } else if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
             return "registrationForm";
         } else {
             accountDao.add(registrationForm.getUsername(), registrationForm.getPassword());
