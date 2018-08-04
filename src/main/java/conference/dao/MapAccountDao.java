@@ -36,14 +36,4 @@ public class MapAccountDao implements AccountDao {
             return 0;
         }
     }
-
-    @Override
-    public boolean findUsername(String username) {
-        if (accounts.containsKey(username)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

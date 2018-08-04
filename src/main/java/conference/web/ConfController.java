@@ -72,7 +72,7 @@ public class ConfController {
         if (errors.hasErrors()) {
             return "registrationForm";
         }
-        if (accountDao.findUsername(registrationForm.getUsername())) {
+        if (accountDao.find(registrationForm.getUsername(), "") != 1) {
             errors.reject("account.username", messageSourceAccessor.getMessage("account.username"));
             return "registrationForm";
         } else if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
