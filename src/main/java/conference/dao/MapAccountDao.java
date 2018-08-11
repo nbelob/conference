@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Map implementation of account DAO.
  */
-@Repository
+/*@Repository*/
 public class MapAccountDao implements AccountDao {
     private Map<String, String> accounts;
 
