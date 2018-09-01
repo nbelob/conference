@@ -94,10 +94,7 @@ public class ConfController {
 
     @RequestMapping(value = "/account/{username}", method = GET)
     public String showAccounts(@PathVariable String username, Model model) {
-        List<Message> messages = new ArrayList<>();
-        messages.add(new Message(null, null, null));
-        messages.add(new Message(null, null, null));
-        messages.add(new Message(null, null, null));
+        List<Message> messages = accountDao.findAllByUsername(username);
         model.addAttribute(username);
         model.addAttribute(messages);
         return "mainForm";

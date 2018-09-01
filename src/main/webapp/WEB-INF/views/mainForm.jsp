@@ -22,10 +22,10 @@
                 <tr>
                     <td>
                         <table align="center">
-                            <c:forEach items="${messages}" var="message">
+                            <c:forEach items="${messageList}" var="message">
                                 <tr>
                                     <td>
-                                        <p>Сообщение</p>
+                                        "${message.text}"
                                     </td>
                                 </tr>
                             </c:forEach>

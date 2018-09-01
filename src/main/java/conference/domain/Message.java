@@ -6,12 +6,12 @@ import java.util.Date;
  * Message.
  */
 public class Message {
-    private Account account;
+    private String userName;
     private String text;
     private Date time;
 
-    public Message(Account account, String text, Date time) {
-        this.account = account;
+    public Message(String userName, String text, Date time) {
+        this.userName = userName;
         this.text = text;
         this.time = time;
     }

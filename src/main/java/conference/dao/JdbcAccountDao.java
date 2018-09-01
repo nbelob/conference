@@ -1,6 +1,7 @@
 package conference.dao;
 
 import conference.domain.Account;
+import conference.domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -47,5 +48,13 @@ public class JdbcAccountDao implements AccountDao {
                 return 0;
             }
         }
+    }
+
+    @Override
+    public List<Message> findAllByUsername(String username) {
+        return jdbcTemplate.query(
+                "select username, text, time from message where username = ?",
+                new MessageRowMapper(),
+                username);
     }
 }
