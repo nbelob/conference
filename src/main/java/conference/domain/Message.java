@@ -15,4 +15,16 @@ public class Message {
         this.text = text;
         this.time = time;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Date getTime() {
+        return time;
+    }
 }

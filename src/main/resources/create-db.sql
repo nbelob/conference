@@ -4,7 +4,7 @@ CREATE TABLE account (
 );
 
 CREATE TABLE message (
-  username VARCHAR(16) UNIQUE NOT NULL,
+  username VARCHAR(16) NOT NULL,
   text VARCHAR(140) NOT NULL,
   time TIMESTAMP NOT NULL,
 );
