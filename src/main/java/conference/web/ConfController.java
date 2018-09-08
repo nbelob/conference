@@ -99,4 +99,15 @@ public class ConfController {
         model.addAttribute(messages);
         return "mainForm";
     }
+
+    @RequestMapping(value = "/account/{username}", method = POST, params = "newMessage")
+    public String newMessageMainForm() {
+        return "redirect:/account/{username}/" + "new";
+    }
+
+    @RequestMapping(value = "/account/{username}/new", method = GET)
+    public String newMessage(Model model) {
+        model.addAttribute(new MessageForm());
+        return "messageForm";
+    }
 }

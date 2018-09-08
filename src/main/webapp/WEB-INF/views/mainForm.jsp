@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
     <body>
+        <sf:form method="POST">
             <table align="center">
                 <tr>
                     <td></td>
@@ -17,7 +18,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" value="Написать сообщение" />
+                        <input type="submit" name="newMessage" value="Написать сообщение" />
                     </td>
                 </tr>
                 <tr>
@@ -43,5 +44,6 @@
                     </td>
                 </tr>
             </table>
+        </sf:form>
     </body>
 </html>
