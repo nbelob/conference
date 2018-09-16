@@ -57,4 +57,12 @@ public class JdbcAccountDao implements AccountDao {
                 new MessageRowMapper(),
                 username);
     }
+
+    @Override
+    public void addMessage(String username, String text) {
+        jdbcTemplate.update(
+                "insert into message (username, text, time) " +
+                        "values (?, ?, sysdate)",
+                username, text);
+    }
 }

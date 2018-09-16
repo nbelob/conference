@@ -8,12 +8,20 @@
 </head>
     <body>
         <sf:form method="POST" modelAttribute="messageForm">
-            <table>
+            <table align="center">
                 <tr>
-                    <td><sf:input path="text"/></td>
+                    <td><sf:textarea path="text"/></td>
                 </tr>
                 <tr>
+                    <td height="5"></td>
+                </tr>
+                <tr>
+                    <td></td>
                     <td>
+                        <input type="submit" name="cancel" value="Отмена" style="width:100" />
+                    </td>
+                    <td>
+                        <input type="submit" name="ok" value="OK" style="width:100" />
                     </td>
                 </tr>
             </table>

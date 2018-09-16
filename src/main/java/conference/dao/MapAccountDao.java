@@ -45,5 +45,9 @@ public class MapAccountDao implements AccountDao {
         List<Message> messages = new ArrayList<>();
         return messages;
     }
+
+    @Override
+    public void addMessage(String username, String text) {
+    }
 }
 

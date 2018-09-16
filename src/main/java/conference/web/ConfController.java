@@ -110,4 +110,15 @@ public class ConfController {
         model.addAttribute(new MessageForm());
         return "messageForm";
     }
+
+    @RequestMapping(value = "/account/{username}/new", method = POST, params = "cancel")
+    public String cancelNewMessage() {
+        return "redirect:/account/{username}";
+    }
+
+    @RequestMapping(value = "/account/{username}/new", method = POST, params = "ok")
+    public String okNewMessage(@PathVariable String username, MessageForm messageForm) {
+        accountDao.addMessage(username, messageForm.getText());
+        return "redirect:/account/{username}";
+    }
 }
