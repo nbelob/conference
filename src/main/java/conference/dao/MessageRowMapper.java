@@ -12,6 +12,6 @@ public class MessageRowMapper implements RowMapper<Message> {
             return new Message(
                     resultSet.getString("username"),
                     resultSet.getString("text"),
-                    resultSet.getDate("time"));
+                    resultSet.getTimestamp("time"));
         }
 }

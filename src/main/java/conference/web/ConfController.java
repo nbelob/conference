@@ -102,7 +102,7 @@ public class ConfController {
 
     @RequestMapping(value = "/account/{username}", method = POST, params = "newMessage")
     public String newMessageMainForm() {
-        return "redirect:/account/{username}/" + "new";
+        return "redirect:/account/{username}/new";
     }
 
     @RequestMapping(value = "/account/{username}/new", method = GET)

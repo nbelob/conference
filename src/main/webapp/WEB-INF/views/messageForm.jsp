@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
     <body>
-        <sf:form method="POST" modelAttribute="messageForm>
+        <sf:form method="POST" modelAttribute="messageForm">
             <table>
                 <tr>
                     <td><sf:input path="text"/></td>
