@@ -20,6 +20,9 @@
                     <td>
                         <input type="submit" name="newMessage" value="Написать сообщение" />
                     </td>
+                    <td>
+                        <input type="submit" name="newPassword" value="Сменить пароль" />
+                    </td>
                 </tr>
                 <tr>
                     <td>

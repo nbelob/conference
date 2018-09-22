@@ -65,4 +65,11 @@ public class JdbcAccountDao implements AccountDao {
                         "values (?, ?, sysdate)",
                 username, text);
     }
+
+    @Override
+    public void upd(String username, String password) {
+        jdbcTemplate.update(
+                "update account set password = ? where username = ?",
+                password, username);
+    }
 }

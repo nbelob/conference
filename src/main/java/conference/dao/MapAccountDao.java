@@ -49,5 +49,9 @@ public class MapAccountDao implements AccountDao {
     @Override
     public void addMessage(String username, String text) {
     }
+
+    @Override
+    public void upd(String username, String password) {
+    }
 }
 

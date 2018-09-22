@@ -12,4 +12,5 @@ public interface AccountDao {
     int find(String username, String password);
     List<Message> findAllByUsername(String username);
     void addMessage(String username, String text);
+    void upd(String username, String password);
 }

@@ -121,4 +121,32 @@ public class ConfController {
         accountDao.addMessage(username, messageForm.getText());
         return "redirect:/account/{username}";
     }
+
+    @RequestMapping(value = "/account/{username}", method = POST, params = "newPassword")
+    public String newPasswordForm() {
+        return "redirect:/account/{username}/newPassword";
+    }
+
+    @RequestMapping(value = "/account/{username}/newPassword", method = GET)
+    public String newPassword(Model model) {
+        model.addAttribute(new NewPasswordForm());
+        return "newPasswordForm";
+    }
+
+    @RequestMapping(value = "/account/{username}/newPassword", method = POST, params = "cancel")
+    public String cancelNewPassword() {
+        return "redirect:/account/{username}";
+    }
+
+    @RequestMapping(value = "/account/{username}/newPassword", method = POST, params = "ok")
+    public String okNewPassword(@Valid NewPasswordForm newPasswordForm, Errors errors, @PathVariable String username) {
+        if (errors.hasErrors()) {
+            return "newPasswordForm";
+        }
+        if (!newPasswordForm.getPassword().equals(newPasswordForm.getConfPassword())) {
+            return "newPasswordForm";
+        }
+        accountDao.upd(username, newPasswordForm.getPassword());
+        return "redirect:/account/{username}";
+    }
 }
