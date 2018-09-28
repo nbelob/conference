@@ -1,6 +1,7 @@
 package conference.web;
 
 import conference.dao.AccountDao;
+import conference.dao.MessageDao;
 import conference.domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -11,11 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -23,8 +20,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 //@RequestMapping("/")
 public class ConfController {
-
     private AccountDao accountDao;
+    private MessageDao messageDao;
     private MessageSourceAccessor messageSourceAccessor;
 
     @Autowired
@@ -52,7 +49,7 @@ public class ConfController {
 
         /*System.out.println(loginForm.getUsername());
         System.out.println(loginForm.getPassword());*/
-        int r = accountDao.find(loginForm.getUsername(), loginForm.getPassword());
+        int r = accountDao.login(loginForm.getUsername(), loginForm.getPassword());
         if (r == 0) {
             return "redirect:/account/" + loginForm.getUsername();
         } else if (r == 1) {
@@ -76,7 +73,7 @@ public class ConfController {
         if (errors.hasErrors()) {
             return "registrationForm";
         }
-        if (accountDao.find(registrationForm.getUsername(), "") != 1) {
+        if (accountDao.login(registrationForm.getUsername(), "") != 1) {
             errors.reject("account.username", messageSourceAccessor.getMessage("account.username"));
             return "registrationForm";
         } else if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
@@ -94,7 +91,7 @@ public class ConfController {
 
     @RequestMapping(value = "/account/{username}", method = GET)
     public String showAccounts(@PathVariable String username, Model model) {
-        List<Message> messages = accountDao.findAllByUsername(username);
+        List<Message> messages = accountDao.findByUsername(username);
         model.addAttribute(username);
         model.addAttribute(messages);
         return "mainForm";
@@ -118,7 +115,7 @@ public class ConfController {
 
     @RequestMapping(value = "/account/{username}/new", method = POST, params = "ok")
     public String okNewMessage(@PathVariable String username, MessageForm messageForm) {
-        accountDao.addMessage(username, messageForm.getText());
+        messageDao.add(username, messageForm.getText());
         return "redirect:/account/{username}";
     }
 
@@ -146,7 +143,7 @@ public class ConfController {
         if (!newPasswordForm.getPassword().equals(newPasswordForm.getConfPassword())) {
             return "newPasswordForm";
         }
-        accountDao.upd(username, newPasswordForm.getPassword());
+        accountDao.update(username, newPasswordForm.getPassword());
         return "redirect:/account/{username}";
     }
 }

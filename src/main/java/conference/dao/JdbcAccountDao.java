@@ -29,7 +29,21 @@ public class JdbcAccountDao implements AccountDao {
     }
 
     @Override
-    public int find(String username, String password) {
+    public void update(String username, String password) {
+        jdbcTemplate.update(
+                "update account set password = ? where username = ?",
+                password, username);
+    }
+
+    @Override
+    public void delete(String username) {
+        jdbcTemplate.update(
+                "delete account where username = ?",
+                username);
+    }
+
+    @Override
+    public int login(String username, String password) {
         List<Account> accounts;
         accounts = jdbcTemplate.query(
                 "select username, password from account where username = ?",
@@ -51,25 +65,10 @@ public class JdbcAccountDao implements AccountDao {
     }
 
     @Override
-    public List<Message> findAllByUsername(String username) {
+    public List<Message> findByUsername(String username) {
         return jdbcTemplate.query(
                 "select username, text, time from message where username = ?",
                 new MessageRowMapper(),
                 username);
-    }
-
-    @Override
-    public void addMessage(String username, String text) {
-        jdbcTemplate.update(
-                "insert into message (username, text, time) " +
-                        "values (?, ?, sysdate)",
-                username, text);
-    }
-
-    @Override
-    public void upd(String username, String password) {
-        jdbcTemplate.update(
-                "update account set password = ? where username = ?",
-                password, username);
     }
 }

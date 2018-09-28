@@ -1,5 +1,6 @@
 package conference.dao;
 
+import conference.dao.exception.AccountNotExistException;
 import conference.domain.Message;
 
 import java.util.List;
@@ -9,8 +10,12 @@ import java.util.List;
  */
 public interface AccountDao {
     void add(String username, String password);
-    int find(String username, String password);
-    List<Message> findAllByUsername(String username);
-    void addMessage(String username, String text);
-    void upd(String username, String password);
+
+    void update(String username, String password);
+
+    void delete(String username);
+
+    int login(String username, String password);
+
+    List<Message> findByUsername(String username);
 }
