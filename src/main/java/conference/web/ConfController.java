@@ -2,6 +2,8 @@ package conference.web;
 
 import conference.dao.AccountDao;
 import conference.dao.MessageDao;
+import conference.dao.exception.AccountNotExistsException;
+import conference.dao.exception.WrongPasswordException;
 import conference.domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -47,19 +49,17 @@ public class ConfController {
             return "loginForm";
         }
 
-        /*System.out.println(loginForm.getUsername());
-        System.out.println(loginForm.getPassword());*/
-        int r = accountDao.login(loginForm.getUsername(), loginForm.getPassword());
-        if (r == 0) {
-            return "redirect:/account/" + loginForm.getUsername();
-        } else if (r == 1) {
-            errors.reject("account.empty", messageSourceAccessor.getMessage("account.empty"));
+        try {
+            accountDao.login(loginForm.getUsername(), loginForm.getPassword());
+        } catch (AccountNotExistsException e) {
+            errors.reject("account.not.exists", messageSourceAccessor.getMessage("account.not.exists"));
             return "loginForm";
-        } else {
-            errors.reject("account.password", messageSourceAccessor.getMessage("account.password"));
+        } catch (WrongPasswordException e) {
+            errors.reject("account.wrong.password", messageSourceAccessor.getMessage("account.wrong.password"));
             return "loginForm";
         }
-        //TODO: implement
+
+        return "redirect:/account/" + loginForm.getUsername();
     }
 
     @RequestMapping(value = "/register", method = GET)
@@ -73,25 +73,27 @@ public class ConfController {
         if (errors.hasErrors()) {
             return "registrationForm";
         }
-        if (accountDao.login(registrationForm.getUsername(), "") != 1) {
-            errors.reject("account.username", messageSourceAccessor.getMessage("account.username"));
+
+        try {
+            accountDao.findByUsername(registrationForm.getUsername());
+
+            errors.reject("account.exists", messageSourceAccessor.getMessage("account.exists"));
             return "registrationForm";
-        } else if (!registrationForm.getPassword().equals(registrationForm.getConfPassword())) {
-            return "registrationForm";
-        } else {
-            accountDao.add(registrationForm.getUsername(), registrationForm.getPassword());
-            return "redirect:/account/" + registrationForm.getUsername();
+        } catch (AccountNotExistsException e) {
+            // Nothing
         }
 
-        /*System.out.println(registrationForm.getUsername());
-        System.out.println(registrationForm.getPassword());
-        System.out.println(registrationForm.getConfPassword());*/
-        //TODO: implement
+        if (!registrationForm.getPassword().equals(registrationForm.getPasswordConfirmation())) {
+            return "registrationForm";
+        }
+
+        accountDao.add(registrationForm.getUsername(), registrationForm.getPassword());
+        return "redirect:/account/" + registrationForm.getUsername();
     }
 
     @RequestMapping(value = "/account/{username}", method = GET)
     public String showAccounts(@PathVariable String username, Model model) {
-        List<Message> messages = accountDao.findByUsername(username);
+        List<Message> messages = messageDao.findByUsername(username);
         model.addAttribute(username);
         model.addAttribute(messages);
         return "mainForm";
@@ -140,7 +142,7 @@ public class ConfController {
         if (errors.hasErrors()) {
             return "newPasswordForm";
         }
-        if (!newPasswordForm.getPassword().equals(newPasswordForm.getConfPassword())) {
+        if (!newPasswordForm.getPassword().equals(newPasswordForm.getPasswordConfirmation())) {
             return "newPasswordForm";
         }
         accountDao.update(username, newPasswordForm.getPassword());

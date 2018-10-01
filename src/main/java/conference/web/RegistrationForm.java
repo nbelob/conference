@@ -15,8 +15,8 @@ public class RegistrationForm {
     private String password;
 
     @NotNull
-    @NotEmpty(message = "{confPassword.empty}")
-    private String confPassword;
+    @NotEmpty(message = "{passwordConfirmation.empty}")
+    private String passwordConfirmation;
 
     public String getUsername() {
         return username;
@@ -34,11 +34,11 @@ public class RegistrationForm {
         this.password = password;
     }
 
-    public String getConfPassword() {
-        return confPassword;
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
     }
 
-    public void setConfPassword(String confPassword) {
-        this.confPassword = confPassword;
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
     }
 }

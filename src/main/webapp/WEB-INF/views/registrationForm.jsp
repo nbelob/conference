@@ -19,8 +19,8 @@
                     <td><sf:password path="password" cssErrorClass="error"/></td>
                 </tr>
                 <tr>
-                    <td><sf:label path="confPassword" cssErrorClass="error">Повторите пароль</sf:label>:</td>
-                    <td><sf:password path="confPassword" cssErrorClass="error"/></td>
+                    <td><sf:label path="passwordConfirmation" cssErrorClass="error">Повторите пароль</sf:label>:</td>
+                    <td><sf:password path="passwordConfirmation" cssErrorClass="error"/></td>
                 </tr>
                 <tr>
                     <td height="10"></td>

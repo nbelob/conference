@@ -1,9 +1,8 @@
 package conference.dao;
 
-import conference.dao.exception.AccountNotExistException;
-import conference.domain.Message;
-
-import java.util.List;
+import conference.dao.exception.AccountNotExistsException;
+import conference.dao.exception.WrongPasswordException;
+import conference.domain.Account;
 
 /**
  * Account DAO.
@@ -15,7 +14,7 @@ public interface AccountDao {
 
     void delete(String username);
 
-    int login(String username, String password);
+    void login(String username, String password) throws AccountNotExistsException, WrongPasswordException;
 
-    List<Message> findByUsername(String username);
+    Account findByUsername(String username) throws AccountNotExistsException;
 }

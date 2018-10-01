@@ -1,8 +1,10 @@
 package conference.dao;
 
+import conference.dao.exception.AccountNotExistsException;
+import conference.dao.exception.WrongPasswordException;
 import conference.domain.Account;
-import conference.domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -43,32 +45,29 @@ public class JdbcAccountDao implements AccountDao {
     }
 
     @Override
-    public int login(String username, String password) {
-        List<Account> accounts;
-        accounts = jdbcTemplate.query(
+    public void login(String username, String password) throws AccountNotExistsException, WrongPasswordException {
+        List<Account> accounts = jdbcTemplate.query(
                 "select username, password from account where username = ?",
                 new AccountRowMapper(),
                 username);
         if (accounts.size() == 0) {
-            return 1;
-        } else {
-            accounts = jdbcTemplate.query(
-                    "select username, password from account where username = ? and password = ?",
-                    new AccountRowMapper(),
-                    username, password);
-            if (accounts.size() == 0) {
-                return 2;
-            } else {
-                return 0;
-            }
+            throw new AccountNotExistsException();
+        }
+
+        if (!password.equals(accounts.get(0).getPassword())) {
+            throw new WrongPasswordException();
         }
     }
 
     @Override
-    public List<Message> findByUsername(String username) {
-        return jdbcTemplate.query(
-                "select username, text, time from message where username = ?",
-                new MessageRowMapper(),
-                username);
+    public Account findByUsername(String username) throws AccountNotExistsException {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "select username, password from account where username = ?",
+                    new AccountRowMapper(),
+                    username);
+        } catch (EmptyResultDataAccessException e) {
+            throw new AccountNotExistsException();
+        }
     }
 }
