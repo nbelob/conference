@@ -21,14 +21,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 //@RequestMapping("/")
-public class ConfController {
+public class AccountController {
     private AccountDao accountDao;
     private MessageDao messageDao;
     private MessageSourceAccessor messageSourceAccessor;
 
     @Autowired
-    public ConfController(AccountDao accountDao, MessageSourceAccessor messageSourceAccessor) {
+    public AccountController(AccountDao accountDao, MessageDao messageDao, MessageSourceAccessor messageSourceAccessor) {
         this.accountDao = accountDao;
+        this.messageDao = messageDao;
         this.messageSourceAccessor = messageSourceAccessor;
     }
 
@@ -102,23 +103,6 @@ public class ConfController {
     @RequestMapping(value = "/account/{username}", method = POST, params = "newMessage")
     public String newMessageMainForm() {
         return "redirect:/account/{username}/new";
-    }
-
-    @RequestMapping(value = "/account/{username}/new", method = GET)
-    public String newMessage(Model model) {
-        model.addAttribute(new MessageForm());
-        return "messageForm";
-    }
-
-    @RequestMapping(value = "/account/{username}/new", method = POST, params = "cancel")
-    public String cancelNewMessage() {
-        return "redirect:/account/{username}";
-    }
-
-    @RequestMapping(value = "/account/{username}/new", method = POST, params = "ok")
-    public String okNewMessage(@PathVariable String username, MessageForm messageForm) {
-        messageDao.add(username, messageForm.getText());
-        return "redirect:/account/{username}";
     }
 
     @RequestMapping(value = "/account/{username}", method = POST, params = "newPassword")
