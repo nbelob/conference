@@ -13,7 +13,7 @@
                 <tr>
                     <td></td>
                     <td>${username}</td>
-                    <td><a href="/conference/login">Выйти</a></td>
+                    <td><a href="<c:url value="/account/logout" />">Выйти</a></td>
                 </tr>
                 <tr>
                     <td></td>

@@ -11,7 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-//@RequestMapping("/")
+@RequestMapping("/message")
 public class MessageController {
     private MessageDao messageDao;
 
@@ -20,20 +20,22 @@ public class MessageController {
         this.messageDao = messageDao;
     }
 
-    @RequestMapping(value = "/account/{username}/new", method = GET)
+    @RequestMapping(value = "/new/{username}", method = GET)
     public String newMessage(Model model) {
         model.addAttribute(new MessageForm());
+
         return "messageForm";
     }
 
-    @RequestMapping(value = "/account/{username}/new", method = POST, params = "cancel")
+    @RequestMapping(value = "/new/{username}", method = POST, params = "cancel")
     public String cancelNewMessage() {
-        return "redirect:/account/{username}";
+        return "redirect:/account/show/{username}";
     }
 
-    @RequestMapping(value = "/account/{username}/new", method = POST, params = "ok")
+    @RequestMapping(value = "/new/{username}", method = POST, params = "ok")
     public String okNewMessage(@PathVariable String username, MessageForm messageForm) {
         messageDao.add(username, messageForm.getText());
-        return "redirect:/account/{username}";
+
+        return "redirect:/account/show/{username}";
     }
 }
