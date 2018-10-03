@@ -78,7 +78,7 @@ public class AccountController {
         return "registrationForm";
     }
 
-    @RequestMapping(value = "/register", method = POST)
+    @RequestMapping(value = "/register", method = POST, params = "registration")
     public String processRegistrationForm(@Valid RegistrationForm registrationForm, Errors errors) {
         if (errors.hasErrors()) {
             return "registrationForm";
@@ -101,6 +101,11 @@ public class AccountController {
         accountDao.add(registrationForm.getUsername(), registrationForm.getPassword());
 
         return "redirect:/account/show/" + registrationForm.getUsername();
+    }
+
+    @RequestMapping(value = "/register", method = POST, params = "cancel")
+    public String cancelRegistrationForm() {
+        return "redirect:/account/login";
     }
 
     @RequestMapping(value = "/show/{username}", method = GET)
