@@ -5,10 +5,12 @@ body {
 div.webPage {
     max-width: 1000px;
     margin: 0 auto;
+    text-align: center;
 }
 
-div.centered {
-    text-align: center;
+textarea.tweetTextarea {
+    width: 400px;
+    height: 100px;
 }
 
 label.error {

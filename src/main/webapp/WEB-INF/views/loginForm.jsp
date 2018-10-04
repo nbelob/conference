@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
 <body>
-<div class="webPage centered">
+<div class="webPage">
 <h1>Вход</h1>
 
 <sf:form method="POST" modelAttribute="loginForm">
