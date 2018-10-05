@@ -6,11 +6,11 @@
     <title>Конференция</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
-<body>
+<body onload="document.messageForm.text.focus();">
 <div class="webPage">
     <h1>Новое сообщение</h1>
 
-    <sf:form method="POST" modelAttribute="messageForm">
+    <sf:form method="POST" name="messageForm" modelAttribute="messageForm">
         <table align="center">
             <tr>
                 <td><sf:textarea path="text" cssClass="tweetTextarea"/></td>

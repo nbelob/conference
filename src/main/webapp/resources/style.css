@@ -8,9 +8,26 @@ div.webPage {
     text-align: center;
 }
 
+table.messageTable {
+    width: 500px;
+}
+
+table.messageTable tr td {
+    background-color: lightgray;
+    border: 5px solid lightgray;
+}
+
 textarea.tweetTextarea {
     width: 400px;
     height: 100px;
+}
+
+span.userName {
+    font-weight: bold;
+}
+
+span.small {
+    font-size: 80%;
 }
 
 label.error {

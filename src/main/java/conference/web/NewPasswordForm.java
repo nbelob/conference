@@ -2,14 +2,17 @@ package conference.web;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class NewPasswordForm {
     @NotNull
     @NotEmpty(message = "{password.empty}")
+    @Size(min = 1, max = 25, message = "{password.size}")
     private String password;
 
     @NotNull
     @NotEmpty(message = "{passwordConfirmation.empty}")
+    @Size(min = 1, max = 25, message = "{passwordConfirmation.size}")
     private String passwordConfirmation;
 
     public String getPassword() {

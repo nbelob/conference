@@ -6,11 +6,11 @@
     <title>Конференция</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
-<body>
+<body onload="document.newPasswordForm.password.focus();">
 <div class="webPage">
     <h1>Смена пароля</h1>
 
-    <sf:form method="POST" modelAttribute="newPasswordForm">
+    <sf:form method="POST" name="newPasswordForm" modelAttribute="newPasswordForm">
         <sf:errors path="*" element="div" cssClass="errors"/>
         <table align="center">
             <tr>

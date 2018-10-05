@@ -6,11 +6,11 @@
     <title>Конференция</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
-<body>
+<body onload="document.loginForm.username.focus();">
 <div class="webPage">
 <h1>Вход</h1>
 
-<sf:form method="POST" modelAttribute="loginForm">
+<sf:form method="POST" name="loginForm" modelAttribute="loginForm">
     <sf:errors path="*" element="div" cssClass="errors"/>
     <table align="center">
         <tr>
