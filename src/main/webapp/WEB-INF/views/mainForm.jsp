@@ -14,7 +14,6 @@
             <tr>
                 <td>
                     <input type="submit" name="newMessage" value="Написать сообщение"/>
-                    &nbsp;
                     <input type="submit" name="newPassword" value="Сменить пароль"/>
                     &nbsp;
                     ${username}

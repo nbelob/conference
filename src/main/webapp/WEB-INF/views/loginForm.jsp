@@ -24,7 +24,6 @@
     </table>
     <p>
         <input type="submit" name="login" value="Войти"/>
-        &nbsp;
         <input type="submit" name="registration" value="Регистрация"/>
     </p>
 </sf:form>

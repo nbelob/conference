@@ -17,6 +17,7 @@ public class RegistrationForm {
 
     @NotNull
     @NotEmpty(message = "{passwordConfirmation.empty}")
+    @Size(min = 1, max = 25, message = "{passwordConfirmation.size}")
     private String passwordConfirmation;
 
     public String getUsername() {

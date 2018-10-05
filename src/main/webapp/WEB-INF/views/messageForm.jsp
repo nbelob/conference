@@ -11,15 +11,11 @@
     <h1>Новое сообщение</h1>
 
     <sf:form method="POST" name="messageForm" modelAttribute="messageForm">
-        <table align="center">
-            <tr>
-                <td><sf:textarea path="text" cssClass="tweetTextarea"/></td>
-            </tr>
-        </table>
+        <sf:errors path="*" element="div" cssClass="errors"/>
+        <sf:textarea path="text" cssClass="tweetTextarea"/>
         <p>
-            <input type="submit" name="cancel" value="Отмена"/>
-            &nbsp;
             <input type="submit" name="ok" value="OK"/>
+            <input type="submit" name="cancel" value="Отмена"/>
         </p>
     </sf:form>
 </div>

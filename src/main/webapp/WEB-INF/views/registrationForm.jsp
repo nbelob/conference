@@ -28,7 +28,6 @@
         </table>
         <p>
             <input type="submit" name="registration" value="Зарегистрироваться и войти"/>
-            &nbsp;
             <input type="submit" name="cancel" value="Отмена"/>
         </p>
     </sf:form>
