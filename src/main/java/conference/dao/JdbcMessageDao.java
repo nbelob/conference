@@ -28,10 +28,11 @@ public class JdbcMessageDao implements MessageDao {
     }
 
     @Override
-    public List<Message> findByUsername(String username) {
+    public List<Message> findAll() {
         return jdbcTemplate.query(
-                "select username, text, time from message where username = ?",
-                new MessageRowMapper(),
-                username);
+                "select username, text, time " +
+                        "from message " +
+                        "order by time desc",
+                new MessageRowMapper());
     }
 }

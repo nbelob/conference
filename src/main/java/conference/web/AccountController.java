@@ -110,7 +110,7 @@ public class AccountController {
 
     @RequestMapping(value = "/show/{username}", method = GET)
     public String showAccounts(@PathVariable String username, Model model) {
-        List<Message> messages = messageDao.findByUsername(username);
+        List<Message> messages = messageDao.findAll();
 
         model.addAttribute(username);
         model.addAttribute(messages);

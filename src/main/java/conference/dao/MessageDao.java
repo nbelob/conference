@@ -10,5 +10,5 @@ import java.util.List;
 public interface MessageDao {
     void add(String username, String text);
 
-    List<Message> findByUsername(String username);
+    List<Message> findAll();
 }
