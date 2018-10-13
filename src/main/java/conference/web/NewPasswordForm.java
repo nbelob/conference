@@ -2,15 +2,18 @@ package conference.web;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class NewPasswordForm {
     @NotNull
     @NotEmpty(message = "{password.empty}")
+    @Size(min = 1, max = 25, message = "{password.size}")
     private String password;
 
     @NotNull
-    @NotEmpty(message = "{confPassword.empty}")
-    private String confPassword;
+    @NotEmpty(message = "{passwordConfirmation.empty}")
+    @Size(min = 1, max = 25, message = "{passwordConfirmation.size}")
+    private String passwordConfirmation;
 
     public String getPassword() {
         return password;
@@ -20,11 +23,11 @@ public class NewPasswordForm {
         this.password = password;
     }
 
-    public String getConfPassword() {
-        return confPassword;
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
     }
 
-    public void setConfPassword(String confPassword) {
-        this.confPassword = confPassword;
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
     }
 }

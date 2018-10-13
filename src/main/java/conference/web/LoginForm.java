@@ -12,6 +12,7 @@ public class LoginForm {
 
     @NotNull
     @NotEmpty(message = "{password.empty}")
+    @Size(min = 1, max = 25, message = "{password.size}")
     private String password;
 
     public String getUsername() {
