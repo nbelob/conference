@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -32,19 +33,20 @@ public class AccountController {
         this.messageDao = messageDao;
         this.messageSourceAccessor = messageSourceAccessor;
     }
-
+/*
     @RequestMapping(value = "/login", method = GET)
     public String showLoginForm(Model model) {
         model.addAttribute(new LoginForm());
 
         return "loginForm";
     }
-
+*/
+/*
     @RequestMapping(value = "/login", method = POST, params = "registration")
     public String registrationLoginForm() {
         return "redirect:/account/register";
     }
-
+*/
 /*
     @RequestMapping(value = "/login", method = POST, params = "login")
     public String loginLoginForm(@Valid LoginForm loginForm, Errors errors) {
@@ -67,11 +69,12 @@ public class AccountController {
         return "redirect:/account/show/" + loginForm.getUsername();
     }
 */
+/*
     @RequestMapping(value = "/logout", method = GET)
     public String logout() {
         return "redirect:/account/login";
     }
-
+*/
     @RequestMapping(value = "/register", method = GET)
     public String showRegistrationForm(Model model) {
         model.addAttribute(new RegistrationForm());
@@ -118,6 +121,18 @@ public class AccountController {
 
         return "mainForm";
     }
+
+    /**
+     * Shows account form for current authenticated account
+     *
+     * @param principal principal
+     * @return view name
+     */
+    @RequestMapping(value = "/show", method = GET)
+    public String showAccountForm(Principal principal) {
+        return "redirect:/account/show/" + principal.getName();
+    }
+
 
     @RequestMapping(value = "/show/{username}", method = POST, params = "newMessage")
     public String newMessageMainForm() {

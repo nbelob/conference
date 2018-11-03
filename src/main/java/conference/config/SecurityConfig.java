@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                .loginPage("/account/login")
+                .loginPage("/login")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -33,8 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/account/login").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/account/register").permitAll()
+                .antMatchers("/resources/**").permitAll()
                 .anyRequest().authenticated();
     }
 

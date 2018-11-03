@@ -18,7 +18,7 @@
                     &nbsp;
                     ${username}
                     &nbsp;
-                    <a href="<c:url value="/account/logout" />">Выйти</a>
+                    <a href="<c:url value="/logout" />">Выйти</a>
                 </td>
             </tr>
             <tr>
