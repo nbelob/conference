@@ -45,6 +45,7 @@ public class AccountController {
         return "redirect:/account/register";
     }
 
+/*
     @RequestMapping(value = "/login", method = POST, params = "login")
     public String loginLoginForm(@Valid LoginForm loginForm, Errors errors) {
         if (errors.hasErrors()) {
@@ -65,7 +66,7 @@ public class AccountController {
 
         return "redirect:/account/show/" + loginForm.getUsername();
     }
-
+*/
     @RequestMapping(value = "/logout", method = GET)
     public String logout() {
         return "redirect:/account/login";
