@@ -10,32 +10,32 @@
 <div class="webPage">
 <h1>Вход</h1>
 
-<form action="<c:url value="/login" />" method="POST">
+<form name="loginForm" action="<c:url value="/login" />" method="POST">
     <!-- use param.error assuming FormLoginConfigurer#failureUrl contains the query parameter error -->
-            <c:if test="${param.error != null}">
-                <div class="errors">
-                    Failed to login.
-                    <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
-                        Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
-                    </c:if>
-                </div>
+    <c:if test="${param.error != null}">
+        <div class="errors">
+            Failed to login.
+            <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+                Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
             </c:if>
-            <!-- the configured LogoutConfigurer#logoutSuccessUrl is /login?logout and contains the query param logout -->
-            <c:if test="${param.logout != null}">
-                <div class="logout">
-                    You have been logged out.
-                </div>
-            </c:if>
+        </div>
+    </c:if>
+    <!-- the configured LogoutConfigurer#logoutSuccessUrl is /login?logout and contains the query param logout -->
+    <c:if test="${param.logout != null}">
+        <div class="logout">
+            You have been logged out.
+        </div>
+    </c:if>
 
     <table align="center">
-            <tr>
-                    <td>Username:</td>
-                    <td><input type="text" name="username"/></td>
-            </tr>
-            <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password"/></td>
-             </tr>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" name="username"/></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" name="password"/></td>
+         </tr>
     </table>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <p>
