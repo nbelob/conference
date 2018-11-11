@@ -6,11 +6,11 @@
     <title>Конференция</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
-<body onload="document.loginForm.username.focus();">
+<body>
 <div class="webPage">
 <h1>Вход</h1>
 
-<form name="loginForm" action="<c:url value="/login" />" method="POST">
+<form action="<c:url value="/login" />" method="POST">
     <!-- use param.error assuming FormLoginConfigurer#failureUrl contains the query parameter error -->
     <c:if test="${param.error != null}">
         <div class="errors">
@@ -30,7 +30,7 @@
     <table align="center">
         <tr>
             <td>Username:</td>
-            <td><input type="text" name="username"/></td>
+            <td><input type="text" name="username" autofocus/></td>
         </tr>
         <tr>
             <td>Password:</td>
