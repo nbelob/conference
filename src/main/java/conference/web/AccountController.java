@@ -3,7 +3,6 @@ package conference.web;
 import conference.dao.AccountDao;
 import conference.dao.MessageDao;
 import conference.dao.exception.AccountNotExistsException;
-import conference.dao.exception.WrongPasswordException;
 import conference.domain.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -33,48 +32,7 @@ public class AccountController {
         this.messageDao = messageDao;
         this.messageSourceAccessor = messageSourceAccessor;
     }
-/*
-    @RequestMapping(value = "/login", method = GET)
-    public String showLoginForm(Model model) {
-        model.addAttribute(new LoginForm());
 
-        return "loginForm";
-    }
-*/
-/*
-    @RequestMapping(value = "/login", method = POST, params = "registration")
-    public String registrationLoginForm() {
-        return "redirect:/account/register";
-    }
-*/
-/*
-    @RequestMapping(value = "/login", method = POST, params = "login")
-    public String loginLoginForm(@Valid LoginForm loginForm, Errors errors) {
-        if (errors.hasErrors()) {
-            return "loginForm";
-        }
-
-        try {
-            accountDao.login(loginForm.getUsername(), loginForm.getPassword());
-        } catch (AccountNotExistsException e) {
-            errors.reject("account.not.exists", messageSourceAccessor.getMessage("account.not.exists"));
-
-            return "loginForm";
-        } catch (WrongPasswordException e) {
-            errors.reject("account.wrong.password", messageSourceAccessor.getMessage("account.wrong.password"));
-
-            return "loginForm";
-        }
-
-        return "redirect:/account/show/" + loginForm.getUsername();
-    }
-*/
-/*
-    @RequestMapping(value = "/logout", method = GET)
-    public String logout() {
-        return "redirect:/account/login";
-    }
-*/
     @RequestMapping(value = "/register", method = GET)
     public String showRegistrationForm(Model model) {
         model.addAttribute(new RegistrationForm());

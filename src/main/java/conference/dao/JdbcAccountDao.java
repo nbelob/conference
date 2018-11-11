@@ -1,14 +1,11 @@
 package conference.dao;
 
 import conference.dao.exception.AccountNotExistsException;
-import conference.dao.exception.WrongPasswordException;
 import conference.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * JDBC implementation of account DAO.
@@ -42,21 +39,6 @@ public class JdbcAccountDao implements AccountDao {
         jdbcTemplate.update(
                 "delete account where username = ?",
                 username);
-    }
-
-    @Override
-    public void login(String username, String password) throws AccountNotExistsException, WrongPasswordException {
-        List<Account> accounts = jdbcTemplate.query(
-                "select username, password from account where username = ?",
-                new AccountRowMapper(),
-                username);
-        if (accounts.size() == 0) {
-            throw new AccountNotExistsException();
-        }
-
-        if (!password.equals(accounts.get(0).getPassword())) {
-            throw new WrongPasswordException();
-        }
     }
 
     @Override
