@@ -24,6 +24,7 @@
         </table>
         <p>
             <input type="submit" name="ok" value="OK"/>
+            &nbsp;
             <input type="submit" name="cancel" value="Отмена"/>
         </p>
     </sf:form>
