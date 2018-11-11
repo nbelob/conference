@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+import java.security.Principal;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -23,29 +25,29 @@ public class MessageController {
         this.messageDao = messageDao;
     }
 
-    @RequestMapping(value = "/new/{username}", method = GET)
+    @RequestMapping(value = "/new", method = GET)
     public String newMessage(Model model) {
         model.addAttribute(new MessageForm());
 
         return "messageForm";
     }
 
-    @RequestMapping(value = "/new/{username}", method = POST, params = "ok")
+    @RequestMapping(value = "/new", method = POST, params = "ok")
     public String okNewMessage(
-            @PathVariable String username,
             @Valid MessageForm messageForm,
-            Errors errors) {
+            Errors errors,
+            Principal principal) {
         if (errors.hasErrors()) {
             return "messageForm";
         }
 
-        messageDao.add(username, messageForm.getText());
+        messageDao.add(principal.getName(), messageForm.getText());
 
-        return "redirect:/account/show/{username}";
+        return "redirect:/account/show";
     }
 
-    @RequestMapping(value = "/new/{username}", method = POST, params = "cancel")
+    @RequestMapping(value = "/new", method = POST, params = "cancel")
     public String cancelNewMessage() {
-        return "redirect:/account/show/{username}";
+        return "redirect:/account/show";
     }
 }

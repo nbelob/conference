@@ -70,59 +70,54 @@ public class AccountController {
         return "redirect:/account/login";
     }
 
-    @RequestMapping(value = "/show/{username}", method = GET)
-    public String showAccounts(@PathVariable String username, Model model) {
+    /**
+     * Shows account form for current authenticated account
+     *
+     * @param model     model
+     * @param principal principal
+     * @return view name
+     */
+    @RequestMapping(value = "/show", method = GET)
+    public String showAccountForm(Model model, Principal principal) {
         List<Message> messages = messageDao.findAll();
 
-        model.addAttribute(username);
+        model.addAttribute(principal.getName());
         model.addAttribute(messages);
 
         return "mainForm";
     }
 
-    /**
-     * Shows account form for current authenticated account
-     *
-     * @param principal principal
-     * @return view name
-     */
-    @RequestMapping(value = "/show", method = GET)
-    public String showAccountForm(Principal principal) {
-        return "redirect:/account/show/" + principal.getName();
-    }
-
-
-    @RequestMapping(value = "/show/{username}", method = POST, params = "newMessage")
+    @RequestMapping(value = "/show", method = POST, params = "newMessage")
     public String newMessageMainForm() {
-        return "redirect:/message/new/{username}";
+        return "redirect:/message/new";
     }
 
-    @RequestMapping(value = "/show/{username}", method = POST, params = "newPassword")
+    @RequestMapping(value = "/show", method = POST, params = "newPassword")
     public String newPasswordForm() {
-        return "redirect:/account/newPassword/{username}";
+        return "redirect:/account/newPassword";
     }
 
-    @RequestMapping(value = "/newPassword/{username}", method = GET)
+    @RequestMapping(value = "/newPassword", method = GET)
     public String newPassword(Model model) {
         model.addAttribute(new NewPasswordForm());
 
         return "newPasswordForm";
     }
 
-    @RequestMapping(value = "/newPassword/{username}", method = POST, params = "cancel")
+    @RequestMapping(value = "/newPassword", method = POST, params = "cancel")
     public String cancelNewPassword() {
-        return "redirect:/account/show/{username}";
+        return "redirect:/account/show";
     }
 
-    @RequestMapping(value = "/newPassword/{username}", method = POST, params = "ok")
-    public String okNewPassword(@Valid NewPasswordForm newPasswordForm, Errors errors, @PathVariable String username) {
+    @RequestMapping(value = "/newPassword", method = POST, params = "ok")
+    public String okNewPassword(@Valid NewPasswordForm newPasswordForm, Errors errors, Principal principal) {
         if (errors.hasErrors()) {
             return "newPasswordForm";
         }
         if (!newPasswordForm.getPassword().equals(newPasswordForm.getPasswordConfirmation())) {
             return "newPasswordForm";
         }
-        accountDao.update(username, newPasswordForm.getPassword());
-        return "redirect:/account/show/{username}";
+        accountDao.update(principal.getName(), newPasswordForm.getPassword());
+        return "redirect:/account/show";
     }
 }
