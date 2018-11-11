@@ -1,7 +1,6 @@
 package conference.dao;
 
 import conference.dao.exception.AccountNotExistsException;
-import conference.dao.exception.WrongPasswordException;
 import conference.domain.Account;
 
 /**
@@ -13,8 +12,6 @@ public interface AccountDao {
     void update(String username, String password);
 
     void delete(String username);
-
-    void login(String username, String password) throws AccountNotExistsException, WrongPasswordException;
 
     Account findByUsername(String username) throws AccountNotExistsException;
 }

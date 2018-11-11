@@ -6,16 +6,16 @@
     <title>Конференция</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
-<body onload="document.registrationForm.username.focus();">
+<body>
 <div class="webPage">
     <h1>Регистрация</h1>
 
-    <sf:form method="POST" name="registrationForm" modelAttribute="registrationForm">
+    <sf:form method="POST" modelAttribute="registrationForm">
         <sf:errors path="*" element="div" cssClass="errors"/>
         <table align="center">
             <tr>
                 <td><sf:label path="username" cssErrorClass="error">Имя</sf:label>:</td>
-                <td><sf:input path="username" cssErrorClass="error"/></td>
+                <td><sf:input path="username" cssErrorClass="error" autofocus="true"/></td>
             </tr>
             <tr>
                 <td><sf:label path="password" cssErrorClass="error">Пароль</sf:label>:</td>
@@ -27,7 +27,8 @@
             </tr>
         </table>
         <p>
-            <input type="submit" name="registration" value="Зарегистрироваться и войти"/>
+            <input type="submit" name="registration" value="Зарегистрироваться"/>
+            &nbsp;
             <input type="submit" name="cancel" value="Отмена"/>
         </p>
     </sf:form>

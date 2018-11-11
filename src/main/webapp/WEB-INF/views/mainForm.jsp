@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -16,7 +17,7 @@
                     <input type="submit" name="newMessage" value="Написать сообщение"/>
                     <input type="submit" name="newPassword" value="Сменить пароль"/>
                     &nbsp;
-                    ${username}
+                    <sec:authentication property="principal.username"/>
                     &nbsp;
                     <a href="<c:url value="/logout" />">Выйти</a>
                 </td>

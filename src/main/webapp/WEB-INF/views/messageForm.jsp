@@ -6,15 +6,16 @@
     <title>Конференция</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />">
 </head>
-<body onload="document.messageForm.text.focus();">
+<body>
 <div class="webPage">
     <h1>Новое сообщение</h1>
 
-    <sf:form method="POST" name="messageForm" modelAttribute="messageForm">
+    <sf:form method="POST" modelAttribute="messageForm">
         <sf:errors path="*" element="div" cssClass="errors"/>
-        <sf:textarea path="text" cssClass="tweetTextarea"/>
+        <sf:textarea path="text" cssClass="tweetTextarea" autofocus="true"/>
         <p>
             <input type="submit" name="ok" value="OK"/>
+            &nbsp;
             <input type="submit" name="cancel" value="Отмена"/>
         </p>
     </sf:form>
