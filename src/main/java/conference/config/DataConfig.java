@@ -17,8 +17,7 @@ public class DataConfig {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("schema.sql")
-                .addScript("data.sql")
+//                .addScripts("schema.sql", "data.sql")
                 .build();
     }
 
