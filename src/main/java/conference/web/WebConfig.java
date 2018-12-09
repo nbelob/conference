@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan("conference.web")
+//@EnableWebMvc
+//@ComponentScan("conference.web")
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean
