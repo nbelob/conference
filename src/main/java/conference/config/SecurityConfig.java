@@ -35,8 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/account/register").permitAll()
-                    .antMatchers("/resources/**").permitAll()
+                    .antMatchers("/css/**").permitAll()
+                    .antMatchers("/h2-console/**").permitAll()  // Allow H2 Database Console
                     .anyRequest().authenticated();
+
+        // Allow H2 Database Console, http://localhost:8080/h2-console
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Override
