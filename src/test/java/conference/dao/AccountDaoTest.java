@@ -3,13 +3,28 @@ package conference.dao;
 import conference.dao.exception.AccountNotExistsException;
 import conference.domain.Account;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 /**
  * Account DAO test.
  */
 public class AccountDaoTest {
     private static AccountDao accountDao;
+
+    @BeforeClass
+    public static void start() {
+        accountDao = new JdbcAccountDao(new JdbcTemplate(
+                new EmbeddedDatabaseBuilder()
+                        .setType(EmbeddedDatabaseType.H2)
+                        .addScript("schema.sql")
+                        .addScript("data.sql")
+                        .build()
+        ));
+    }
 
     @Test
     public void addTest() throws AccountNotExistsException {
