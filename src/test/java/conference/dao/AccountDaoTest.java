@@ -20,8 +20,7 @@ public class AccountDaoTest {
         accountDao = new JdbcAccountDao(new JdbcTemplate(
                 new EmbeddedDatabaseBuilder()
                         .setType(EmbeddedDatabaseType.H2)
-                        .addScript("schema.sql")
-                        .addScript("data.sql")
+                        .addScripts("schema.sql", "data.sql")
                         .build()
         ));
     }

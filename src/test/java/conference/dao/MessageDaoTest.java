@@ -1,13 +1,27 @@
 package conference.dao;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 /**
  * Message DAO test.
  */
 public class MessageDaoTest {
     private static MessageDao messageDao;
+
+    @BeforeClass
+    public static void start() {
+        messageDao = new JdbcMessageDao(new JdbcTemplate(
+                new EmbeddedDatabaseBuilder()
+                        .setType(EmbeddedDatabaseType.H2)
+                        .addScripts("schema.sql", "data.sql")
+                        .build()
+        ));
+    }
 
     @Test
     public void addTest() {
