@@ -26,8 +26,8 @@ public class MessageDaoTest {
     @Test
     public void addTest() {
         messageDao.add("jsmith", "Mess");
-        Assert.assertEquals("jsmith", messageDao.findAll().get(messageDao.findAll().size() - 1).getUserName());
-        Assert.assertEquals("Mess", messageDao.findAll().get(messageDao.findAll().size() - 1).getText());
+        Assert.assertEquals("jsmith", messageDao.findAll().get(0).getUserName());
+        Assert.assertEquals("Mess", messageDao.findAll().get(0).getText());
     }
 
     @Test
