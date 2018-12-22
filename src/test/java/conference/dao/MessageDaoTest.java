@@ -45,11 +45,21 @@ public class MessageDaoTest {
 /*        int i = messageDao.findAll().size();
         messageDao.add("jsmith", "Mess1");
         Assert.assertEquals(i + 1, messageDao.findAll().size());*/
+        messageDao = new JdbcMessageDao(new JdbcTemplate(
+                new EmbeddedDatabaseBuilder()
+                        .setType(EmbeddedDatabaseType.H2)
+                        .addScripts("clean.sql", "schema.sql", "data.sql")
+                        .build()
+        ));
+
         List<Message> messages = messageDao.findAll();
 
         Assert.assertEquals(3, messages.size());
+
         Assert.assertEquals("jsmith",
                 messages.get(0).getUserName());
-        Assert.assertEquals("Some people care too much. I think it''s called love.",
-                messages.get(0).getText());    }
+        Assert.assertEquals("Some people care too much. I think it's called love.",
+                messages.get(0).getText());
+    }
+
 }
