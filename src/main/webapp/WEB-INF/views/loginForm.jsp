@@ -29,11 +29,11 @@
 
     <table align="center">
         <tr>
-            <td>Username:</td>
+            <td>Имя:</td>
             <td><input type="text" name="username" autofocus/></td>
         </tr>
         <tr>
-            <td>Password:</td>
+            <td>Пароль:</td>
             <td><input type="password" name="password"/></td>
          </tr>
     </table>
